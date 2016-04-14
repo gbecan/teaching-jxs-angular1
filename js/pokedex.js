@@ -27,9 +27,12 @@ pokeApp.controller('pokeController', function($scope, $log,PokemonCheisoudou, $h
                 $scope.log="Error";
                 });
 
-            $scope.envoyer=function(pokemonID){
+            $scope.go=function(pokemonID){
             console.log("Hallo");
             console.log(pokemonID);
             $scope.pokemonDisplay=PokemonCheisoudou.get();
             }
+
+
+   // $filter('myPokeFilter')
 })//fin du pokeController

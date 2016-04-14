@@ -26,9 +26,9 @@
             <select name="pokemonSelection" id="pokemonSelect" ng-model="pokemonList">
                 <option value="#">----Select ----</option>
                 <!-- // ng-repeat = une boucle for : for i in tab....-->
-                <option ng-repeat="option in pokemonList | filter:MyPokeFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
+                <option ng-repeat="option in pokemonList | filter:myPokemonFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
             </select>
-            <button ng-click="envoyer(PokemonList)"> GO GET THEM ! </button>
+            <button ng-click="go(PokemonList)"> GO GET THEM ! </button>
                 <pre>
                     Resultats de la recherche : {{pokemonDisplay.pokemonID}}
                 </pre>
