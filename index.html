@@ -5,6 +5,7 @@
     <title></title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/image.css"/>
 
 </head>
 <body ng-app="pokedex">
@@ -13,11 +14,35 @@
 		<h1>Pokésir</h1>
 
 		<!-- Search -->
-		<div></div>
+        <div class="searchPokemon" ng-controller="pokeController as vm">
 
 		<!-- Pokémon information -->
-		<div></div>
+		<div>
+            <input type = "text" placeholder = "N°Pokemon" name="MyPokeFilter" ng-model="myPokemonFilter">
+            <p> Affichage ID : {{myPokemonFilter}}</p>
+        </div>
+            <div>
+            <label for="pokemonSelect"> Pokemon selection : </label>
+            <select name="pokemonSelection" id="pokemonSelect" ng-model="pokemonList">
+                <option value="#">----Select ----</option>
+                <!-- // ng-repeat = une boucle for : for i in tab....-->
+                <option ng-repeat="option in pokemonList | filter:MyPokeFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
+            </select>
+            <button ng-click="envoyer(PokemonList)"> GO GET THEM ! </button>
+                <pre>
+                    Resultats de la recherche : {{pokemonDisplay.pokemonID}}
+                </pre>
+                <pre>
+                    {{pokemonDisplay.name}}
+                </pre>
+               <!-- <pre>
+                    <ul>
+                        <li ng-repeat="move in pokemonDisplay.moves"> {{move.name}}</li>
+                    </ul>
+                </pre> -->
 
+
+    </div>
 	</div>
 
     <!-- Dependencies -->
