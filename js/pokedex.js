@@ -7,12 +7,12 @@ pokeApp.config(['$resourceProvider', function($resourceProvider) {
 var pokeApiUrl = "http://pokeapi.co/"
 
 /**Factory**/
-pokeApp.factory("PokemonCheisoudou", function($resource){
+pokeApp.factory("searchPokemon", function($resource){
     return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{id:'@id'});
     });
 
 /**Controller**/
-pokeApp.controller('MainController', function($scope, $log,PokemonCheisoudou, $http, $resource){
+pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http, $resource){
     $scope.log=function(){
         return console.log()
     };
@@ -20,42 +20,29 @@ pokeApp.controller('MainController', function($scope, $log,PokemonCheisoudou, $h
     $scope.showLoader= function(){
         $scope.state="LOADING";
     }
-    $scope.noresult = function(){
-        $scope.state = "NORESULT" ;
-    }
-    $scope.result = function(){
-        $scope.state = "SUCCESS" ;
-    }
-
-   // if ($scope.state)
 
     $http({
         method: 'GET',
-        url:pokeApiUrl+'api/v2/pokedex/1/'
+        url:pokeApiUrl+'api/v2/pokedex/1'
         }).then(function successfulCallback(response){
             $scope.pokemonList = response.data.pokemon_entries;
-            console.log(response.data.pokemon_entries);
+            $scope.state="SUCCESS";
             }, function errorCallback(response){
                 $scope.log="Error";
-                });
-                $scope.go=function(id){
-                console.log("Hallo");
-                console.log(pokemon_entries.pokemon_species.id);
-               // $scope.pokemonDisplay=PokemonCheisoudou.get();
-                }
+               });
 
-
-
+               $scope.go=function(pokemonID){
+               console.log("Hallo test ");
+               $scope.myPokemon=searchPokemon.get({id:pokemonID});
+               }
 
 });//fin du MainController
 
-
-pokeApp.controller('pokecontroller', function($scope, $log,PokemonCheisoudou, $http, $resource){
+pokeApp.controller('pokemonDetailsController', function($scope, $log, searchPokemon, $http, $resource){
+    $scope.log=function(){
+           return console.log()
+       };
+       $scope.uri= myPokemon.url;
+       console.log(uri);
 
 });
-
-
-
-
-   // $filter('myPokeFilter')
-

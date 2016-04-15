@@ -16,11 +16,11 @@
 		<!-- Search -->
 
         <div class="searchPokemon" ng-controller="MainController as vm">
-
+            <div class= "loader" ng-show="state == 'LOADING'"><div class ="textLoading" >Loading...</div></div>
 
 		<!-- Pokémon information -->
 		<div>
-            <input type = "text" name="MyPokeFilter" ng-model="myPokemonFilter" placeholder="Pokemon name here !">
+            <input type = "text" name="MyPokeFilter" ng-model="myPokemonFilter" placeholder="Pokemon name">
             <!--<p> Affichage ID : {{myPokemonFilter}}</p>-->
 
             <label for="pokemonSelect"> Pokemon selection : </label>
@@ -29,22 +29,18 @@
                 <!-- // ng-repeat = une boucle for : for i in tab....-->
                 <option ng-repeat="option in pokemonList | filter:myPokemonFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
             </select>
-            <div class= "loader" ng-show="state == 'LOADING'"><div class ="textLoading" >Loading...</div></div>
-            <button class="btn btn-primary" ng-click="showLoader()"> GO GET THEM ! </button>
 
-         <div class="pokemonResutltsDisplay" ng-controller="pokeController">
-          <!--   <p>
-                 Resultats de la recherche : {{pokemonDisplay.pokemonID}}
+            <button class="btn btn-primary" ng-click="showLoader(); go(pokemonList)"> GO GET THEM ! </button>
+
+         <div class="pokemonResutltsDisplay" ng-controller="pokemonDetailsController" >
+             <div ng-show="state =='SUCCESS'"></div>
+             <p>
+                 Resultats de la recherche : {{myPokemon.pokemonID}}
              </p>
              <p>
-                 {{pokemonDisplay.name}}
-             </p>
-             <p>
-                 <ul>
-                     <li ng-repeat="move in pokemonDisplay.moves"> {{move.name}}</li>
-                 </ul>
-             </p>
-         </div>-->
+                 {{uri}}
+             </p
+         </div>
 
 
     </div>
