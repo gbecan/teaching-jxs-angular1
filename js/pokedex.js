@@ -8,14 +8,26 @@ var pokeApiUrl = "http://pokeapi.co/"
 
 /**Factory**/
 pokeApp.factory("PokemonCheisoudou", function($resource){
-    return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{pokemonID:'@id'});
+    return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{id:'@id'});
     });
 
 /**Controller**/
-pokeApp.controller('pokeController', function($scope, $log,PokemonCheisoudou, $http, $resource){
+pokeApp.controller('MainController', function($scope, $log,PokemonCheisoudou, $http, $resource){
     $scope.log=function(){
-    return console.log()
+        return console.log()
     };
+
+    $scope.showLoader= function(){
+        $scope.state="LOADING";
+    }
+    $scope.noresult = function(){
+        $scope.state = "NORESULT" ;
+    }
+    $scope.result = function(){
+        $scope.state = "SUCCESS" ;
+    }
+
+   // if ($scope.state)
 
     $http({
         method: 'GET',
@@ -26,13 +38,24 @@ pokeApp.controller('pokeController', function($scope, $log,PokemonCheisoudou, $h
             }, function errorCallback(response){
                 $scope.log="Error";
                 });
+                $scope.go=function(id){
+                console.log("Hallo");
+                console.log(pokemon_entries.pokemon_species.id);
+               // $scope.pokemonDisplay=PokemonCheisoudou.get();
+                }
 
-            $scope.go=function(pokemonID){
-            console.log("Hallo");
-            console.log(pokemonID);
-            $scope.pokemonDisplay=PokemonCheisoudou.get();
-            }
+
+
+
+});//fin du MainController
+
+
+pokeApp.controller('pokecontroller', function($scope, $log,PokemonCheisoudou, $http, $resource){
+
+});
+
+
 
 
    // $filter('myPokeFilter')
-})//fin du pokeController
+

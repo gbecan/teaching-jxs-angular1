@@ -14,32 +14,37 @@
 		<h1>Pokésir</h1>
 
 		<!-- Search -->
-        <div class="searchPokemon" ng-controller="pokeController as vm">
+
+        <div class="searchPokemon" ng-controller="MainController as vm">
+
 
 		<!-- Pokémon information -->
 		<div>
-            <input type = "text" placeholder = "N°Pokemon" name="MyPokeFilter" ng-model="myPokemonFilter">
-            <p> Affichage ID : {{myPokemonFilter}}</p>
-        </div>
-            <div>
+            <input type = "text" name="MyPokeFilter" ng-model="myPokemonFilter" placeholder="Pokemon name here !">
+            <!--<p> Affichage ID : {{myPokemonFilter}}</p>-->
+
             <label for="pokemonSelect"> Pokemon selection : </label>
             <select name="pokemonSelection" id="pokemonSelect" ng-model="pokemonList">
                 <option value="#">----Select ----</option>
                 <!-- // ng-repeat = une boucle for : for i in tab....-->
                 <option ng-repeat="option in pokemonList | filter:myPokemonFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
             </select>
-            <button ng-click="go(PokemonList)"> GO GET THEM ! </button>
-                <pre>
-                    Resultats de la recherche : {{pokemonDisplay.pokemonID}}
-                </pre>
-                <pre>
-                    {{pokemonDisplay.name}}
-                </pre>
-               <!-- <pre>
-                    <ul>
-                        <li ng-repeat="move in pokemonDisplay.moves"> {{move.name}}</li>
-                    </ul>
-                </pre> -->
+            <div class= "loader" ng-show="state == 'LOADING'"><div class ="textLoading" >Loading...</div></div>
+            <button class="btn btn-primary" ng-click="showLoader()"> GO GET THEM ! </button>
+
+         <div class="pokemonResutltsDisplay" ng-controller="pokeController">
+          <!--   <p>
+                 Resultats de la recherche : {{pokemonDisplay.pokemonID}}
+             </p>
+             <p>
+                 {{pokemonDisplay.name}}
+             </p>
+             <p>
+                 <ul>
+                     <li ng-repeat="move in pokemonDisplay.moves"> {{move.name}}</li>
+                 </ul>
+             </p>
+         </div>-->
 
 
     </div>
