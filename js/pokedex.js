@@ -33,6 +33,7 @@ pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http,
 
                $scope.go=function(pokemonID){
                console.log("Hallo test ");
+               //pb ICI TT
                $scope.myPokemon=searchPokemon.get({id:pokemonID});
                }
 
