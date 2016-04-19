@@ -36,11 +36,11 @@ pokeApp.service('pokemonService', [function () {
 /**Controller**/
 pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http, pokemonService){
     var pokeURL="http://pokeapi.co/api/v2/pokedex/1";
-    $scope.pokemon;
+    //$scope.pokemon;
     // Get the list of all the Pokemons
     $http.get(pokeURL)
         .then(function successCallback(response){
-                $log.log("LOG : CONTROLLER : ILS ARRIVENNT !! - Qui ça ? - LES POKÉMOOOOOONS !");
+                $log.log("LOG : CONTROLLER : Successfully got them !!");
                 $scope.data = {
                     // To display the name of the selected pokemon
                     selectedPokemon: null,
@@ -53,8 +53,11 @@ pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http,
          //pokemonID = entry_number du pokemon selectionné
             console.log(pokemonID);
             $scope.myPokemon=searchPokemon.get({id:pokemonID});
-           // console.log("Stringify" + JSON.stringify($scope.myPokemon));
-         }
+          $scope.myPokemonData= {
+          name: myPokemon.name,
+          url:myPokemon.url
+          };
+         } //EOFunction
 
 
 
