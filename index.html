@@ -16,35 +16,42 @@
 		<!-- Search -->
 
         <div class="searchPokemon" ng-controller="MainController as vm">
-            <div class= "loader" ng-show="state == 'LOADING'"><div class ="textLoading" >Loading...</div></div>
+            <!--LOADER-->
+
 
 		<!-- Pokémon information -->
 		<div>
             <input type = "text" name="MyPokeFilter" ng-model="myPokemonFilter" placeholder="Pokemon name">
+            <div class= "loader" ng-show="state == 'LOADING'">
+                <div class ="textLoading" >Loading...</div>
+            </div>
             <!--<p> Affichage ID : {{myPokemonFilter}}</p>-->
 
             <label for="pokemonSelect"> Pokemon selection : </label>
-            <select name="pokemonSelection" id="pokemonSelect" ng-model="pokemonList">
+            <select name="pokemonSelection" id="pokemonSelect" ng-model="data.selectedPokemon">
                 <option value="#">----Select ----</option>
                 <!-- // ng-repeat = une boucle for : for i in tab....-->
-                <option ng-repeat="option in pokemonList | filter:myPokemonFilter" value="{{option.entry_number">{{option.pokemon_species.name}}</option>
-            </select>
+                <option ng-repeat="pokemon in data.pokemons |filter:myPokemonFilter" value="{{pokemon.entry_number}}">{{ pokemon.entry_number }} - {{pokemon.pokemon_species.name}}</option>
+                </select>
 
-            <button class="btn btn-primary" ng-click="showLoader(); go(pokemonList)"> GO GET THEM ! </button>
+                        <button class="btn btn-primary" ng-click="showLoader(); go(data.selectedPokemon)"> GO GET THEM ! </button>
 
-         <div class="pokemonResutltsDisplay" ng-controller="pokemonDetailsController" >
-             <div ng-show="state =='SUCCESS'"></div>
-             <p>
-                 Resultats de la recherche : {{myPokemon.pokemonID}}
-             </p>
-             <p>
-                 {{uri}}
-             </p
+            {{myPokemon}}
+        </div><!--MainCtler-->
+
+<!--        <div class="pokemonResutltsDisplay" id="pokeInfoResults" ng-controller="pokemonDetailsController" >
+            <div class= "succes" ng-show="state == 'LOADING'"></div>
+
+             <div ng-model="pokemonC" value="">
+                <p>Resultats de la recherche : {{pokemon}}</p>
+                <button class="btn btn-primary" ng-click="hideLoader()"> Afficher les résultats </button>
+                 {{myPokemon}}
+
+             </div>
          </div>
 
-
+-->
     </div>
-	</div>
 
     <!-- Dependencies -->
     <script src="js/jquery.min.js"></script>
