@@ -35,23 +35,25 @@
                 </select>
 
                         <button class="btn btn-primary" ng-click="showLoader(); go(data.selectedPokemon)"> GO GET THEM ! </button>
-            <pre> {{myPokemon}}</pre>
 
-          <!-- <div ng-repeat="pokemon2 in myPokemonData.name"> {{pokemon2.myPokemonData.name}} - {{pokemon2.myPokemonData.url}}</div> -->
+                <div ng-show="myPokemon" >Nom : {{myPokemon.name}}</div>
+                <div ng-show="myPokemon">Color : {{myPokemon.color.name}}</div>
+                <div ng-show="myPokemon">Egg_group : {{myPokemon.egg_groups.name}}</div>
+                <div ng-show="myPokemon">Shape : {{myPokemon.shape.name}}</div>
+          
+
+
+
         </div><!--MainCtler-->
 
 <!--        <div class="pokemonResutltsDisplay" id="pokeInfoResults" ng-controller="pokemonDetailsController" >
-            <div class= "succes" ng-show="state == 'LOADING'"></div>
 
-             <div ng-model="pokemonC" value="">
-                <p>Resultats de la recherche : {{pokemon}}</p>
-                <button class="btn btn-primary" ng-click="hideLoader()"> Afficher les résultats </button>
-                 {{myPokemon}}
+            <div ng-show="myPokemon">Nom : {{myPokemon.name}}</div>
 
              </div>
          </div>
-
 -->
+
     </div>
 
     <!-- Dependencies -->

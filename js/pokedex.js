@@ -8,8 +8,8 @@ var pokeApiUrl = "http://pokeapi.co/"
 
 /**Factory**/
 pokeApp.factory("searchPokemon", function($resource){
-   // return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{id:'@id'});
-   return $resource("http://pokeapi.co/api/v2/pokemon/?limit=811");
+    return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{id:'@id'});
+   //return $resource("http://pokeapi.co/api/v2/pokemon/?limit=811");
 });
 
 
@@ -36,6 +36,7 @@ pokeApp.service('pokemonService', [function () {
 /**Controller**/
 pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http, pokemonService){
     var pokeURL="http://pokeapi.co/api/v2/pokedex/1";
+    //$scope.state='LOADING';
     //$scope.pokemon;
     // Get the list of all the Pokemons
     $http.get(pokeURL)
@@ -49,37 +50,32 @@ pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http,
                 };
         });
 
-         $scope.go=function(pokemonID){
-         //pokemonID = entry_number du pokemon selectionné
-            console.log(pokemonID);
-            $scope.myPokemon=searchPokemon.get({id:pokemonID});
-          $scope.myPokemonData= {
-          name: myPokemon.name,
-          url:myPokemon.url
-          };
-         } //EOFunction
+    $scope.go=function(pokemonID){
+        //pokemonID = entry_number du pokemon selectionné
+        console.log(pokemonID);
+        searchPokemon.get({id:pokemonID}).$promise
+             .then(function(response){
+                 $scope.myPokemon=response;
+                 console.log($scope.myPokemon);
+             });
+     } //EOFunction
+
+
+   /*  $scope.showLoader=function(){
+           $scope.state="LOADING";
+     }
+     */
+
+
 
 
 
 
 });//fin du MainController
-
+/*
 pokeApp.controller('pokemonDetailsController', function($scope, $log, searchPokemon, $http, pokemonSevice){
 
-  /*  //Get the detailed info about the selected pokemon
-    $scope.go=function(pokemonID){
-    pokemonID = searchPokemon.get({id:pokemonID});
-      $log.log("Go function");
-       console.log(pokemonID);
-       $scope.myPokemon=searchPokemon.get({id:pokemonID});
 
-       console.log(myPokemon);
-    }
-
-    */
-    //$scope.pokemon;
-
-
-                   //console.log(id);
 
 });
+*/
