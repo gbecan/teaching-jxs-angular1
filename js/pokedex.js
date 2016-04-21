@@ -1,4 +1,6 @@
 var pokeApp = angular.module('pokedex', ['ngResource']);
+/*Utilities*/
+
 
 pokeApp.config(['$resourceProvider', function($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
@@ -9,39 +11,18 @@ var pokeApiUrl = "http://pokeapi.co/"
 /**Factory**/
 pokeApp.factory("searchPokemon", function($resource){
     return $resource("http://pokeapi.co/api/v2/pokemon-species/:id/",{id:'@id'});
-   //return $resource("http://pokeapi.co/api/v2/pokemon/?limit=811");
 });
 
-
-
-
-/**service**/
-//un service peut être considére comme une classe, on y a donc accès de n'importe où.
-pokeApp.service('pokemonService', [function () {
-    var pokemon;
-    this.setPokemon = function (pokemon) {
-        this.pokemon = pokemon;
-    }
-    this.setPokemonSprite = function (sprite) {
-    //sprite= image
-        this.pokemon.sprite = sprite;
-    }
-}]);
-
-
-
-
-
-
 /**Controller**/
-pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http, pokemonService){
+pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http){
     var pokeURL="http://pokeapi.co/api/v2/pokedex/1";
-    //$scope.state='LOADING';
-    //$scope.pokemon;
+    $scope.loading=true;
+
     // Get the list of all the Pokemons
     $http.get(pokeURL)
         .then(function successCallback(response){
                 $log.log("LOG : CONTROLLER : Successfully got them !!");
+                $scope.loading=false;
                 $scope.data = {
                     // To display the name of the selected pokemon
                     selectedPokemon: null,
@@ -50,32 +31,35 @@ pokeApp.controller('MainController', function($scope, $log,searchPokemon, $http,
                 };
         });
 
+
     $scope.go=function(pokemonID){
-        //pokemonID = entry_number du pokemon selectionné
-        console.log(pokemonID);
+    console.log(pokemonID);
+        // Show loading spinner.
+         $scope.loading = true;
         searchPokemon.get({id:pokemonID}).$promise
              .then(function(response){
                  $scope.myPokemon=response;
                  console.log($scope.myPokemon);
-             });
+                 })
+             .finally(function (response) {
+              // Hide loading spinner whether our call succeeded or failed.
+              $scope.loading = false;
+              });
+
+
      } //EOFunction
 
-
-   /*  $scope.showLoader=function(){
-           $scope.state="LOADING";
-     }
-     */
-
-
-
-
-
-
 });//fin du MainController
-/*
-pokeApp.controller('pokemonDetailsController', function($scope, $log, searchPokemon, $http, pokemonSevice){
+
+pokeApp.controller('pokemonDetailsController', function($scope, $log, searchPokemon, $http){
+$scope.myPokemon
+// watches if the pokemon in service changes
+    $scope.$watch(
+        // the watched value
+        function () {
+            return searchPokemon.myPokemon
+        }
+    )
 
 
-
-});
-*/
+});//fin pokemondetailsController
