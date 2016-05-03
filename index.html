@@ -39,16 +39,16 @@
 
      <div class="pokemonResutltsDisplay" id="pokeInfoResults" ng-controller="pokemonDetailsController" >
 
-         <div ng-show="myPokemon"><u><i>Name :</i></u> {{myPokemon.name}}</div>
-         <div ng-show="myPokemon"><u><i>Color  :</i></u> {{myPokemon.color.name}}</div>
+         <div ng-show="myPokemon"><u><i>Nom :</i></u> {{myPokemon.names[4].name}}</div>
+         <div ng-show="myPokemon"><u><i>Couleur  :</i></u> {{myPokemon.color.name}}</div>
          <div ng-show="myPokemon"><u><i>Egg_group :</i></u> {{myPokemon.egg_groups[0].name}}</div>
-         <div ng-show="myPokemon"><u><i>Shape :</i></u> {{myPokemon.shape.name}}</div>
-         <div ng-show="myPokemon"><u><i>Evolves from :</i></u> {{myPokemon.evolves_from_species.name}}</div>
+         <div ng-show="myPokemon"><u><i>Forme :</i></u> {{myPokemon.shape.name}}</div>
+         <div ng-show="myPokemon"><u><i>Evolution de :</i></u> {{myPokemon.evolves_from_species.name}}</div>
          <div ng-show="myPokemon" class="attributes"><u><i>Flavor text French :</i></u>
              {{myPokemon.flavor_text_entries[5].flavor_text}} {{myPokemon.flavor_text_entries[21].flavor_text}}
              {{myPokemon.flavor_text_entries[29].flavor_text}}, {{myPokemon.flavor_text_entries[37].flavor_text}}
          </div>
-         <div ng-show="myPokemon"><u><i>genara :</i></u> {{myPokemon.genera[4].genus}}</div>
+         <div ng-show="myPokemon"><u><i>Genara :</i></u> {{myPokemon.genera[4].genus}}</div>
          <div ng-show="myPokemon"><u><i>growth_rate :</i></u> {{myPokemon.growth_rate.name}}</div>
          <div ng-show="myPokemon"><u><i>Habitat :</i></u> {{myPokemon.habitat.name}}</div>
         </div>
